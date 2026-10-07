@@ -1,20 +1,29 @@
-# Najm GRUB theme
+<div align="center">
 
-A pixel-font GRUB theme with Arabic verses in the corners. Dark, quiet, and sharp at every resolution from 1024×768 to 4K and ultrawide.
 
-[العربية](README.ar.md)
+# Najm
 
-![Najm GRUB theme at 1920×1080](docs/preview/hero.png)
+**A dark, pixel-font GRUB theme with Arabic verses in the corners.**
+Looks right from 1024×768 up to 4K and ultrawide.
 
-Every screenshot in this repo is a **real GRUB** (2.12) running in QEMU, not a mock-up.
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![GRUB 2](https://img.shields.io/badge/GRUB-2.x-444.svg)](https://www.gnu.org/software/grub/)
+[![Stars](https://img.shields.io/github/stars/najm-labs/grub-theme?style=flat&color=gold)](https://github.com/najm-labs/grub-theme/stargazers)
 
+<img src="docs/preview/hero.png" alt="Najm GRUB theme at 1920×1080" width="820">
+
+[Install](#install) · [Options](#options) · [Previews](#previews) · [Distros](#does-it-work-on-my-distro) · [Troubleshooting](#troubleshooting) · [العربية](README.ar.md)
+
+</div>
+
+Every screenshot here is a real GRUB 2.12 running in QEMU, not a mock-up.
 ## Features
 
-- **15 ready-made resolutions**, plus any other `WxH` built on demand. Layout, decorations and font all scale together.
-- **Install-time customisation**: accent colour, Arabic verses (five classical presets or your own text), key-hint bar, countdown bar, menu timeout.
-- **One installer for different distros**: finds `/boot/grub` vs `/boot/grub2`, `grub-mkconfig` vs `grub2-mkconfig`, and your screen's native resolution.
-- **Safe**: backs up `/etc/default/grub`, edits only a clearly marked block, rolls back if `grub-mkconfig` fails, and `--uninstall` restores your original file exactly.
-- **No dependencies for the default look.** Python + Pillow are needed only for customisation, and the installer can fetch them into a throw-away virtualenv.
+- **15 ready-made resolutions.** Any other `WxH` is generated when you ask for it. Layout, decorations and font scale together.
+- **Customise at install time.** Accent colour, verses (five classical presets or your own text), the key-hint bar, the countdown bar and the menu timeout.
+- **One installer for most distros.** It finds `/boot/grub` or `/boot/grub2`, `grub-mkconfig` or `grub2-mkconfig`, and your screen's native resolution.
+- **Easy to undo.** It backs up `/etc/default/grub`, only edits its own marked block, rolls back if `grub-mkconfig` fails, and `--uninstall` restores your file exactly.
+- **No dependencies for the default look.** Python and Pillow are only needed if you customise, and the installer can fetch them into a throw-away virtualenv.
 
 ## Install
 
@@ -24,36 +33,36 @@ cd grub-theme
 sudo ./install.sh
 ```
 
-In a terminal this starts a short wizard (resolution, colour, verses, extras, timeout). Reboot afterwards.
+In a terminal this opens a short wizard (resolution, colour, verses, extras, timeout). Reboot when it's done.
 
-Non-interactive, e.g. for scripts or dotfiles:
+For scripts and dotfiles, skip the prompts:
 
 ```sh
-sudo ./install.sh -y                                   # auto-detect resolution, default look
+sudo ./install.sh -y                                   # detect resolution, default look
 sudo ./install.sh -y -r 2560x1440 --accent cyan --verse stars --timeout 5
 sudo ./install.sh -y --no-verses --no-hints            # minimal: menu + countdown only
 sudo ./install.sh --dry-run                            # show what would happen
 sudo ./install.sh --uninstall
 ```
 
-Requires `bash`, and GRUB 2 as your bootloader (on Alpine: `apk add bash`).
+You need `bash` and GRUB 2 as your bootloader. On Alpine: `apk add bash`.
 
 ### Options
 
-| Option | Meaning |
+| Option | What it does |
 | --- | --- |
 | `-r, --resolution WxH` | Screen resolution. Default: detected from the connected monitor. |
 | `--accent NAME\|#RRGGBB` | `najm` (default), `gold`, `green`, `cyan`, `blue`, `violet`, `rose`, `white`, or any hex colour. |
-| `--verse ID` | `najm` (default), `ships`, `stars`, `dunya`, `qadar`. See `./install.sh --list-verses`. |
-| `--vertical TEXT` `--horizontal TEXT` | Your own Arabic text (give both). |
-| `--no-verses` `--no-hints` `--no-countdown` | Remove the corner verses / the Enter-E-C hint bar / the countdown bar. |
-| `--timeout N` | Set `GRUB_TIMEOUT`. |
+| `--verse ID` | `najm` (default), `ships`, `stars`, `dunya`, `qadar`. Run `./install.sh --list-verses` to see them. |
+| `--vertical TEXT` `--horizontal TEXT` | Your own Arabic text. Give both. |
+| `--no-verses` `--no-hints` `--no-countdown` | Drop the corner verses, the Enter/E/C hint bar, or the countdown bar. |
+| `--timeout N` | Sets `GRUB_TIMEOUT`. |
 | `--show-menu` | Always show the menu (Ubuntu hides it by default). |
-| `--name NAME` | Theme directory name (default `najm`). |
-| `--themes-dir`, `--grub-cfg` | Override the detected locations. |
-| `--no-regenerate` | Edit files but don't run `grub-mkconfig`. |
-| `--export DIR` | Only write the finished theme to `DIR` (NixOS, packaging, manual installs). |
-| `--detect` | Print what was detected on your machine (include this in bug reports). |
+| `--name NAME` | Theme directory name. Default: `najm`. |
+| `--themes-dir`, `--grub-cfg` | Override the detected paths. |
+| `--no-regenerate` | Edit files but skip `grub-mkconfig`. |
+| `--export DIR` | Only write the finished theme to `DIR`. For NixOS, packaging and manual installs. |
+| `--detect` | Print what was detected on your machine. Paste this in bug reports. |
 | `-y, --yes` / `--dry-run` / `--no-pip` | No prompts / change nothing / never use pip. |
 
 ## Previews
@@ -62,25 +71,30 @@ Requires `bash`, and GRUB 2 as your bootloader (on Alpine: `apk add bash`).
 
 ![Accent colours](docs/preview/accents.png)
 
-**Layouts and verses**: minimal layout (left), another verse preset with the blue accent (right).
+**Layouts and verses.** Minimal layout on the left, another verse with the blue accent on the right.
 
 ![Layouts](docs/preview/layouts.png)
 
-**Scaling**: 1280×720, 2560×1440, 3840×2160 and 3440×1440 ultrawide, all shown at the same width.
+**Scaling.** 1280×720, 2560×1440, 3840×2160 and 3440×1440 ultrawide, all drawn at the same width.
 
 ![Resolutions](docs/preview/resolutions.png)
 
 ## Resolutions
 
-Ready-made: `1024x768 1280x720 1280x800 1280x1024 1366x768 1440x900 1600x900 1680x1050 1920x1080 1920x1200 2560x1080 2560x1440 2560x1600 3440x1440 3840x2160`.
+Ready-made:
 
-Anything else (say `1600x1200`) is generated on the fly when Pillow is available. Without Pillow the installer uses the closest ready-made theme and still sets GRUB to your resolution.
+`1024x768` `1280x720` `1280x800` `1280x1024` `1366x768` `1440x900` `1600x900` `1680x1050` `1920x1080` `1920x1200` `2560x1080` `2560x1440` `2560x1600` `3440x1440` `3840x2160`
 
-`GRUB_GFXMODE` is set to `<res>x32,<res>,auto`. If your firmware doesn't offer that mode GRUB falls back to `auto` and the theme still works, just not pixel-matched. Some BIOS (VBE) setups do not offer modes such as 1366×768 (the QEMU BIOS used for these previews does not); UEFI normally offers the panel's native mode.
+Anything else (say `1600x1200`) is generated on the spot if Pillow is available. Without Pillow, the installer uses the closest ready-made theme and still sets GRUB to your resolution.
+
+`GRUB_GFXMODE` is set to `<res>x32,<res>,auto`. If the firmware doesn't offer that mode, GRUB falls back to `auto` and the theme still works, just not pixel-matched.
+
+> [!NOTE]
+> Some BIOS (VBE) setups don't offer modes like 1366×768. The QEMU BIOS used for these previews is one of them. UEFI normally offers the panel's native mode.
 
 ## Does it work on my distro?
 
-GRUB's location differs between distributions. The installer handles this:
+GRUB lives in different places depending on the distro. The installer handles that.
 
 | Family | GRUB files | Regenerate with |
 | --- | --- | --- |
@@ -90,13 +104,19 @@ GRUB's location differs between distributions. The installer handles this:
 | NixOS | declarative | refused with instructions, use `--export` |
 | systemd-boot, rEFInd, Limine | not GRUB | not supported |
 
-What has actually been tested: rendering in real GRUB under QEMU (BIOS and UEFI), a real `grub-mkconfig` run against an Ubuntu 24.04 userland, and the installer's logic on staged Debian/Ubuntu, Fedora and RHEL-style directory layouts (`tests/test_install.sh`). Other distributions follow the same conventions but have not been run on real installs. Please open an issue with the output of `./install.sh --detect` if something is off.
+**What has actually been tested:**
 
-If `/etc/default/grub.d/*.cfg` drop-ins (common on Ubuntu) also set `GRUB_THEME`, `GRUB_TERMINAL` or `GRUB_GFXMODE`, the installer warns you, because they are read later and can override the theme.
+- Rendering in real GRUB under QEMU, BIOS and UEFI.
+- A real `grub-mkconfig` run against an Ubuntu 24.04 userland.
+- The installer's logic on staged Debian/Ubuntu, Fedora and RHEL-style directory layouts (`tests/test_install.sh`).
+
+Other distros follow the same conventions but haven't been run on real installs. If something is off, open an issue and include the output of `./install.sh --detect`.
+
+Ubuntu-style `/etc/default/grub.d/*.cfg` drop-ins are read later and can override `GRUB_THEME`, `GRUB_TERMINAL` or `GRUB_GFXMODE`. If any of them set those, the installer warns you.
 
 ## How it works
 
-The installer copies a theme directory to `/boot/grub{,2}/themes/najm/` and appends a block to the end of `/etc/default/grub`:
+The installer copies a theme directory to `/boot/grub{,2}/themes/najm/` and appends this block to `/etc/default/grub`:
 
 ```sh
 # >>> najm-grub-theme >>>
@@ -107,30 +127,80 @@ unset GRUB_TERMINAL GRUB_TERMINAL_OUTPUT   # themes need the graphical terminal
 # <<< najm-grub-theme <<<
 ```
 
-then runs `grub-mkconfig`, which emits a `loadfont` line for every `.pf2` font in the theme folder and sets `theme`. Your own lines are never edited; `--uninstall` deletes the block and the theme folder.
+Then it runs `grub-mkconfig`, which adds a `loadfont` line for every `.pf2` font in the theme folder and sets `theme`. Your own lines are never touched. `--uninstall` removes the block and the theme folder.
 
-Arabic text can't be shaped by GRUB, so the verses are pre-rendered PNGs (with proper joining and right-to-left order). The menu font is a PF2 bitmap font; `tools/pf2.py` can re-draw it at any integer pixel size, which is how large screens get a crisp, correctly sized font.
+GRUB can't shape Arabic text, so the verses are pre-rendered PNGs with proper joining and right-to-left order. The menu font is a PF2 bitmap font, and `tools/pf2.py` can redraw it at any integer pixel size. That's how large screens get a crisp font at the right size.
 
-### Manual install
+<details>
+<summary><b>Manual install</b></summary>
 
-If you'd rather not run the script:
+<br>
 
 ```sh
 sudo cp -r themes/1920x1080 /boot/grub/themes/najm      # /boot/grub2 on Fedora/openSUSE
-# add to /etc/default/grub: GRUB_THEME, GRUB_GFXMODE, and remove GRUB_TERMINAL=console
+# add GRUB_THEME and GRUB_GFXMODE to /etc/default/grub, and remove GRUB_TERMINAL=console
 sudo grub-mkconfig -o /boot/grub/grub.cfg                # grub2-mkconfig on Fedora/openSUSE
 ```
 
-Note: a hand-written `grub.cfg` must contain a `loadfont` for the theme's `.pf2` file; `grub-mkconfig` does it for you.
+If you write `grub.cfg` by hand, it needs a `loadfont` for the theme's `.pf2` file. `grub-mkconfig` does this for you.
+
+</details>
 
 ## Troubleshooting
 
-- **I don't see the theme at boot.** Many distros hide the menu (`GRUB_TIMEOUT_STYLE=hidden` or `GRUB_TIMEOUT=0`). Hold <kbd>Shift</kbd> (BIOS) or tap <kbd>Esc</kbd> (UEFI) while booting, or re-run with `--show-menu`.
-- **`error: ... bitmap file ... is of unsupported format`.** A theme file points to an empty or non-image path (for example `desktop-image: ""`). The installer validates themes to prevent this; if you edit `theme.txt` yourself, remove the empty line.
-- **Text is tiny or in a different font.** The `.pf2` file wasn't loaded: regenerate with `grub-mkconfig`, don't just copy files.
-- **GRUB is stuck at 640×480 / 800×600.** The firmware doesn't offer your mode; check the available ones with `videoinfo` at the GRUB prompt (<kbd>c</kbd>).
-- **Black screen right after choosing a kernel.** Remove `GRUB_GFXPAYLOAD_LINUX=keep` from the managed block and re-run `grub-mkconfig`.
-- **`/boot` on its own or encrypted partition.** Works as long as GRUB can read it; the theme lives under `/boot`, so it follows `/boot`.
+<details>
+<summary><b>I don't see the theme at boot</b></summary>
+
+<br>
+
+Many distros hide the menu (`GRUB_TIMEOUT_STYLE=hidden` or `GRUB_TIMEOUT=0`). Hold <kbd>Shift</kbd> (BIOS) or tap <kbd>Esc</kbd> (UEFI) while booting, or re-run the installer with `--show-menu`.
+
+</details>
+
+<details>
+<summary><b><code>error: ... bitmap file ... is of unsupported format</code></b></summary>
+
+<br>
+
+A theme file points to an empty or non-image path, for example `desktop-image: ""`. The installer checks for this. If you edited `theme.txt` yourself, delete the empty line.
+
+</details>
+
+<details>
+<summary><b>Text is tiny or in the wrong font</b></summary>
+
+<br>
+
+The `.pf2` file wasn't loaded. Regenerate with `grub-mkconfig`; copying the files isn't enough.
+
+</details>
+
+<details>
+<summary><b>GRUB is stuck at 640×480 or 800×600</b></summary>
+
+<br>
+
+The firmware doesn't offer your mode. At the GRUB prompt (<kbd>c</kbd>), run `videoinfo` to see which ones it does.
+
+</details>
+
+<details>
+<summary><b>Black screen right after choosing a kernel</b></summary>
+
+<br>
+
+Remove `GRUB_GFXPAYLOAD_LINUX=keep` from the managed block and re-run `grub-mkconfig`.
+
+</details>
+
+<details>
+<summary><b><code>/boot</code> is on its own or an encrypted partition</b></summary>
+
+<br>
+
+That's fine as long as GRUB can read it. The theme lives under `/boot`, so it goes wherever `/boot` goes.
+
+</details>
 
 ## Building from source
 
@@ -143,16 +213,30 @@ tests/test_install.sh                         # installer tests, no real GRUB to
 tools/preview.py themes/1920x1080 -r 1920x1080 -o shot.png   # real GRUB in QEMU (--uefi for UEFI)
 ```
 
-Previews need `grub-mkrescue` (+ `grub-pc-bin`, `grub-efi-amd64-bin` for `--uefi`), `xorriso`, `mtools`, `qemu-system-x86_64` and, for `--uefi`, `ovmf`.
+Previews need `grub-mkrescue` (plus `grub-pc-bin`, and `grub-efi-amd64-bin` for `--uefi`), `xorriso`, `mtools`, `qemu-system-x86_64`, and `ovmf` for `--uefi`.
 
-Layout of the repo: `build.py` (generator), `install.sh` (installer), `themes/` (pre-built), `data/` (resolutions, accents, verses), `assets/fonts/`, `tools/` (PF2 library, preview), `tests/`.
+Repo layout:
+
+| Path | Contents |
+| --- | --- |
+| `build.py` | theme generator |
+| `install.sh` | installer |
+| `themes/` | pre-built themes |
+| `data/` | resolutions, accents, verses |
+| `assets/fonts/` | fonts |
+| `tools/` | PF2 library, preview script |
+| `tests/` | installer tests |
+
+## AI use
+
+I used AI to help write this README and some of the Python scripts (`build.py`, `tools/`).
 
 ## Credits
 
 - Verses: al-Mutanabbi (`najm`, `ships`, `stars`), Ahmed Shawqi (`dunya`), Abu al-Qasim al-Shabbi (`qadar`).
-- Arabic text rendered in [Amiri](https://github.com/aliftype/amiri) (SIL OFL 1.1).
-- Fonts and licences: [assets/fonts/NOTICE.md](assets/fonts/NOTICE.md).
+- Arabic text is set in [Amiri](https://github.com/aliftype/amiri) (SIL OFL 1.1).
+- Font licences: [assets/fonts/NOTICE.md](assets/fonts/NOTICE.md).
 
 ## License
 
-[MIT](LICENSE), except third-party fonts which keep their own licences.
+[MIT](LICENSE). Third-party fonts keep their own licences.

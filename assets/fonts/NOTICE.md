@@ -8,7 +8,6 @@ Licensed under the SIL Open Font License 1.1 - see `AMIRI-LICENSE.txt`.
 The pixel font used for the boot menu. Larger sizes are derived from these
 files by `tools/pf2.py`.
 
-> **MAINTAINER TODO before publishing:** the license of this font is not
-> recorded in the PF2 files. Confirm the font's author and terms, then replace
-> this paragraph with the author, source URL and license text (and, if the
-> terms don't allow redistribution, swap in a permissively licensed pixel font).
+Created by Victor Einhardt (aka "Sergeant Koopa" / "tybee"), 2005.
+Licensed under Creative Commons Attribution-ShareAlike 3.0 Unported.
+Source: https://www.deviantart.com/tybee/art/Victor-s-Pixel-Font-1-0-16037996   
