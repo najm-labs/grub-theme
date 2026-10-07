@@ -12,7 +12,7 @@ Looks right from 1024×768 up to 4K and ultrawide.
 
 <img src="docs/preview/hero.png" alt="Najm GRUB theme at 1920×1080" width="820">
 
-[Install](#install) · [Options](#options) · [Previews](#previews) · [Distros](#does-it-work-on-my-distro) · [Troubleshooting](#troubleshooting) · [العربية](README.ar.md)
+[Install](#install) · [Options](#options) · [Previews](#previews) · [Distros](#does-it-work-on-my-distro) · [Troubleshooting](#troubleshooting)
 
 </div>
 
