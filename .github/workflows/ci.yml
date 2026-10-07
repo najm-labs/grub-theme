@@ -1,0 +1,29 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck python3-pil
+          pip install --user arabic-reshaper python-bidi
+      - name: ShellCheck
+        run: shellcheck -S warning install.sh tests/test_install.sh
+      - name: Installer tests
+        run: tests/test_install.sh
+      - name: Wizard test (pseudo-terminal)
+        run: python3 tests/test_wizard.py
+      - name: Every pre-built theme passes validation
+        run: |
+          for res in $(cat data/resolutions.txt); do
+            ./install.sh --export "/tmp/theme-$res" -r "$res" >/dev/null
+          done
+      - name: Themes rebuild from source for every resolution
+        run: |
+          for res in $(cat data/resolutions.txt); do
+            python3 build.py -r "$res" -o "/tmp/built-$res" >/dev/null
+          done
